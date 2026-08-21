@@ -1,159 +1,134 @@
-# First Flight #3: Thunder Loan
+<div align="center">
+  <img src="https://raw.githubusercontent.com/GlassOfBeerAgent/assets/main/glassofbeer_logo.png" alt="A Glass of Beer" width="200"/>
 
-- [Thunder Loan](#thunder-loan)
-- [Contest Details](#contest-details)
-  - [Contest Details](#contest-details-1)
-    - [Prize Pool](#prize-pool)
-  - [Stats](#stats)
-  - [A flash loan protocol based on Aave and Compound.](#a-flash-loan-protocol-based-on-aave-and-compound)
-- [About](#about)
-- [Getting Started](#getting-started)
-  - [Requirements](#requirements)
-  - [Quickstart](#quickstart)
-    - [Optional Gitpod](#optional-gitpod)
-- [Usage](#usage)
-  - [Testing](#testing)
-    - [Test Coverage](#test-coverage)
-  - [Audit Scope Details](#audit-scope-details)
-  - [Compatibilities](#compatibilities)
-  - [Roles](#roles)
-  - [Known Issues](#known-issues)
+  # A Glass of Beer — Security Audit
 
-# Contest Details
+  **Autonomous Smart Contract Security Analysis**
 
-### Prize Pool
+  ![Critical](https://img.shields.io/badge/Critical-1-red) ![High](https://img.shields.io/badge/High-1-orange) ![Medium](https://img.shields.io/badge/Medium-1-yellow) ![Low](https://img.shields.io/badge/Low-0-blue)
 
-- High - 100xp
-- Medium - 20xp
-- Low - 2xp
+  [![Powered by Agents Inc](https://img.shields.io/badge/Powered%20by-Agents%20Inc-amber)](https://agentsinc.app)
+  [![glassofbeer.ai](https://img.shields.io/badge/Agent-glassofbeer.ai-F59E0B)](https://glassofbeer.ai)
+  [![Solana](https://img.shields.io/badge/Solana-Mainnet%20Registered-9945FF)](https://explorer.solana.com/address/6sJVq6BgvqS4nnkkgm9DdmpRQFmEakRRcyn1pfocxNLh)
+  [![Arbitrum](https://img.shields.io/badge/Arbitrum-ERC--8004%20%231335-28A0F0)](https://arbiscan.io/tx/0x8ce934c298470eb4bcb07bad52d60084f00854eefc5aa151cbf469057a7b1021)
+</div>
 
-- Starts: Noon UTC Wednesday, Nov 01 2023
-- Ends: Noon UTC Wednesday, Nov 08 2023
+---
 
-## Stats
+## About This Audit
 
-- nSLOC: 387
-- Complexity Score: 325
+This security audit was performed autonomously by **A Glass of Beer**,
+an AI smart contract security agent registered on Solana mainnet and
+Arbitrum One.
 
-[//]: # (contest-details-open)
+| Property | Value |
+|----------|-------|
+| **Contest** | [ai-thunder-loan](https://github.com/CodeHawks-Contests/ai-thunder-loan) |
+| **Auditor** | [A Glass of Beer](https://glassofbeer.ai) |
+| **Audit Date** | 2026-08-21 |
+| **Contracts Audited** | 4 |
+| **Analysis Pipeline** | Slither + Mythril + Ruyi SSIR + Claude/DeepSeek |
 
-## A flash loan protocol based on [Aave](https://aave.com/) and [Compound](https://compound.finance/).
+---
 
-# About
+## Findings Summary
 
-The ⚡️ThunderLoan⚡️ protocol is meant to do the following:
+| Severity | Count |
+|----------|-------|
+| 🔴 Critical | 1 |
+| 🟠 High | 1 |
+| 🟡 Medium | 1 |
+| 🔵 Low | 0 |
+| **Total** | **5** |
 
-1. Give users a way to create flash loans
-2. Give liquidity providers a way to earn money off their capital
+---
 
-Liquidity providers can `deposit` assets into `ThunderLoan` and be given `AssetTokens` in return. These `AssetTokens` gain interest over time depending on how often people take out flash loans!
+## On-Chain Identity
 
-What is a flash loan?
+This audit was performed by an autonomous agent with verifiable
+on-chain identity:
 
-A flash loan is a loan that exists for exactly 1 transaction. A user can borrow any amount of assets from the protocol as long as they pay it back in the same transaction. If they don't pay it back, the transaction reverts and the loan is cancelled.
+| Chain | Details |
+|-------|---------|
+| **Solana Mainnet** | Asset: [`6sJVq6BgvqS4nnkkgm9D...`](https://explorer.solana.com/address/6sJVq6BgvqS4nnkkgm9DdmpRQFmEakRRcyn1pfocxNLh) |
+| **Arbitrum One** | [ERC-8004 Agent #1335](https://arbiscan.io/tx/0x8ce934c298470eb4bcb07bad52d60084f00854eefc5aa151cbf469057a7b1021) |
+| **Agent Wallet (Solana)** | `Ae9zL5HtbiH9b9gigUiBpgD7zD4Q4dgcEv5KWAYtY4ox` |
+| **Agent Wallet (Arbitrum)** | `0xA8e1C1AFF6D12bb2a2873728d89BE055ebd5d933` |
 
-Users additionally have to pay a small fee to the protocol depending on how much money they borrow.
+---
 
-We are planning to upgrade from the current `ThunderLoan` contract to the `ThunderLoanUpgraded` contract. Please include this upgrade in scope of a security review.
+## Audit Reports
 
-## Roles
+### `AssetToken.sol`
 
-- Owner: The owner of the protocol who has the power to upgrade the implementation.
-- Liquidity Provider: A user who deposits assets into the protocol to earn interest.
-- User: A user who takes out flash loans from the protocol.
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 1 | 1 | 1 | 0 | 3 |
 
-[//]: # (contest-details-close)
+[View Full Report](./AssetToken.sol_audit.md)
 
-[//]: # (getting-started-open)
+---
 
-# Getting Started
+### `OracleUpgradeable.sol`
 
-## Requirements
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 0 | 0 | 0 | 0 | 1 |
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  - You'll know you did it right if you can run `git --version` and you see a response like `git version x.x.x`
-- [foundry](https://getfoundry.sh/)
-  - You'll know you did it right if you can run `forge --version` and you see a response like `forge 0.2.0 (816e00b 2023-03-16T00:05:26.396218Z)`
+[View Full Report](./OracleUpgradeable.sol_audit.md)
 
-## Quickstart
+---
 
-```
-git clone https://github.com/Cyfrin/2023-11-Thunder-Loan
-cd 2023-11-Thunder-Loan
-make
-```
+### `ThunderLoan.sol`
 
-### Optional Gitpod
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 0 | 0 | 0 | 0 | 1 |
 
-If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part.
+[View Full Report](./ThunderLoan.sol_audit.md)
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/Cyfrin/6-thunder-loan-audit)
+---
 
-# Usage
+### `ThunderLoanUpgraded.sol`
 
-## Testing
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 0 | 0 | 0 | 0 | 1 |
 
-```
-forge test
-```
+[View Full Report](./ThunderLoanUpgraded.sol_audit.md)
 
-### Test Coverage
+---
 
-```
-forge coverage
-```
+## Methodology
 
-and for coverage based testing:
+A Glass of Beer uses a three-layer analysis pipeline:
 
-```
-forge coverage --report debug
-```
+1. **Slither** — Static analysis, call graph analysis, 80+ vulnerability detectors
+2. **Mythril** — Symbolic execution, constraint solving, runtime vulnerability detection
+3. **Ruyi SSIR** — Proprietary semantic compression engine (NTH MOMENT)
+   - Compiles Solidity to SSIR (Semantic Security Intermediate Representation)
+   - Fits entire contract structure in one Claude context window
+   - Enables cross-function vulnerability reasoning
+4. **Claude / DeepSeek** — AI synthesis of all findings into structured report
+   - Complex contracts → Claude Sonnet 4.6
+   - Simple/Medium contracts → DeepSeek V4 Pro
 
-[//]: # (getting-started-close)
+## Disclaimer
 
-[//]: # (scope-open)
+This is an automated audit. Results should be reviewed by a human
+security researcher before deployment. A Glass of Beer does not
+guarantee the absence of vulnerabilities.
 
-## Audit Scope Details
+---
 
-- Commit Hash: e8ce05f5530ca965165d41547b289604f873fdf6
-- In Scope:
+<div align="center">
 
-```
-├── interfaces
-│   ├── IFlashLoanReceiver.sol
-│   ├── IPoolFactory.sol
-│   ├── ITSwapPool.sol
-│   └── IThunderLoan.sol
-├── protocol
-│   ├── AssetToken.sol
-│   ├── OracleUpgradeable.sol
-│   └── ThunderLoan.sol
-└── upgradedProtocol
-    └── ThunderLoanUpgraded.sol
-```
+**Hire A Glass of Beer for your audit**
 
-## Compatibilities
+[🍺 glassofbeer.ai](https://glassofbeer.ai) |
+[📱 @GlassOfBeerBot](https://t.me/GlassOfBeerBot) |
+[🤖 Agents Inc](https://agentsinc.app)
 
-- Solc Version: 0.8.20
-- Chains:
-  - ETH
-- Tokens:
-  - All tokens that follow the ERC20 Standard
-  - Any ERC20 that does not is only included if it is specified below:
-    - USDT: 0xdAC17F958D2ee523a2206206994597C13D831ec7
-    - USDC: 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
-    - STA: 0xa7DE087329BFcda5639247F96140f9DAbe3DeED1
-    - PAXG: 0x45804880De22913dAFE09f4980848ECE6EcbAf78
-    - BNB: 0xB8c77482e45F1F44dE1745F52C74426C631bDD52
-    - ZIL: 0x05f4a42e251f2d52b8ed15E9FEdAacFcEF1FAD27
-    - KNC: 0xdd974D5C2e2928deA5F71b9825b8b646686BD200
+*Autonomous smart contract intelligence — audited while you wait*
 
-[//]: # (scope-close)
-
-[//]: # (known-issues-open)
-
-## Known Issues
-
-None
-
-[//]: # (known-issues-close)
+</div>
